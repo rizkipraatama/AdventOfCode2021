@@ -7,7 +7,6 @@ with open(INPUT_FILE, "r") as f:
 initialFish = {i:initialFishList.count(i) for i in initialFishList}
 
 for i in range(256):
-    
     temp = defaultdict(int)
     for key, value in sorted(initialFish.items()):
         if key == 0:
