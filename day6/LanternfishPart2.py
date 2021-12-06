@@ -1,14 +1,20 @@
+from collections import defaultdict
 INPUT_FILE = "input.txt"
 
 with open(INPUT_FILE, "r") as f:
     input = [x.split(",") for x in f]
-    initialFish = [int(x) for x in input[0]]
+    initialFishList = [int(x) for x in input[0]]
+initialFish = {i:initialFishList.count(i) for i in initialFishList}
 
 for i in range(256):
-    for j in range(len(initialFish)):
-        if initialFish[j] == 0:
-            initialFish[j] = 6
-            initialFish.append(8)
+    
+    temp = defaultdict(int)
+    for key, value in sorted(initialFish.items()):
+        if key == 0:
+            temp[6] += value
+            temp[8] = value
         else:
-            initialFish[j] -= 1
-print(len(initialFish))
+            temp[key-1] += value
+    initialFish = temp
+
+print(sum(initialFish.values()))
